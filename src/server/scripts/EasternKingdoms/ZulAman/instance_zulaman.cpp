@@ -49,7 +49,8 @@ Position const HarrisonJonesLoc = {120.687f, 1674.0f, 42.0217f, 1.59044f};
 DoorData const doorData[] =
 {
     { GO_ZULJIN_FIREWALL,            DATA_ZULJIN,   DOOR_TYPE_ROOM    },
-    { GO_DOOR_HALAZZI,               DATA_HALAZZI,  DOOR_TYPE_PASSAGE },
+    // GO_DOOR_HALAZZI (186303, Lynx Temple Exit) removed from doorData: it required Halazzi's death to open,
+    // deadlocking bots approaching from the west side (door blocks reach to Halazzi). Keep it always open.
     // Lynx Temple Entrance (186304) removed from doorData: keep it always open during Halazzi fight (bots were getting locked out)
     { GO_DOOR_AKILZON,               DATA_AKILZON,  DOOR_TYPE_ROOM    },
     { GO_ALTAR_TORCH_EAGLE_GOD,      DATA_AKILZON,  DOOR_TYPE_PASSAGE },
@@ -159,8 +160,8 @@ public:
             if (go->GetEntry() == GO_GATE_HEXLORD)
                 CheckInstanceStatus(go);
 
-            // Lynx Temple Entrance: force always open (no longer tied to Halazzi combat state)
-            if (go->GetEntry() == GO_LYNX_TEMPLE_ENTRANCE)
+            // Lynx Temple doors: force always open (no longer tied to Halazzi encounter state)
+            if (go->GetEntry() == GO_LYNX_TEMPLE_ENTRANCE || go->GetEntry() == GO_DOOR_HALAZZI)
                 go->SetGoState(GO_STATE_ACTIVE);
         }
 
