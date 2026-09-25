@@ -271,7 +271,7 @@ void WorldSession::HandleBattlemasterJoinOpcode(WorldPacket& recvData)
             return;
         }
 
-        isPremade = (grp->GetMembersCount() >= bg->GetMinPlayersPerTeam() && bgTypeId != BATTLEGROUND_RB);
+        isPremade = false;
         uint32 avgWaitTime = 0;
 
         GroupQueueInfo* ginfo = bgQueue.AddGroup(_player, grp, bgTypeId, bracketEntry, 0, false, isPremade, 0, 0);

@@ -50,7 +50,7 @@ DoorData const doorData[] =
 {
     { GO_ZULJIN_FIREWALL,            DATA_ZULJIN,   DOOR_TYPE_ROOM    },
     { GO_DOOR_HALAZZI,               DATA_HALAZZI,  DOOR_TYPE_PASSAGE },
-    { GO_LYNX_TEMPLE_ENTRANCE,       DATA_HALAZZI,  DOOR_TYPE_ROOM    },
+    // Lynx Temple Entrance (186304) removed from doorData: keep it always open during Halazzi fight (bots were getting locked out)
     { GO_DOOR_AKILZON,               DATA_AKILZON,  DOOR_TYPE_ROOM    },
     { GO_ALTAR_TORCH_EAGLE_GOD,      DATA_AKILZON,  DOOR_TYPE_PASSAGE },
     { GO_ALTAR_TORCH_DRAGONHAWK_GOD, DATA_JANALAI,  DOOR_TYPE_PASSAGE },
@@ -158,6 +158,10 @@ public:
 
             if (go->GetEntry() == GO_GATE_HEXLORD)
                 CheckInstanceStatus(go);
+
+            // Lynx Temple Entrance: force always open (no longer tied to Halazzi combat state)
+            if (go->GetEntry() == GO_LYNX_TEMPLE_ENTRANCE)
+                go->SetGoState(GO_STATE_ACTIVE);
         }
 
         void SummonHostage(uint8 num)

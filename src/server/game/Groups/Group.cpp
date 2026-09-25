@@ -2150,7 +2150,7 @@ GroupJoinBattlegroundResult Group::CanJoinBattlegroundQueue(Battleground const* 
         return ERR_GROUP_JOIN_BATTLEGROUND_FAIL;
 
     // too many players in the group
-    if (GetMembersCount() > bgEntry->maxGroupSize)
+    if (GetMembersCount() > 40)
         return ERR_BATTLEGROUND_NONE;
 
     // get a player as reference, to compare other players' stats to (arena team id, level bracket, etc.)
